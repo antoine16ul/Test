@@ -35,12 +35,17 @@ jobs:
       matrix:
         debug: [ "Debug","Release" ]
         conf:
-          - { cont: "debian:10", name: "buster"}
+          - { cont: "debian/buildd:10", name: "deb10"}
+          - { cont: "debian/buildd:9", name: "deb9"}
+          - { cont: "centos:8", name: "cos8"}
+          - { cont: "centos:7", name: "cos7"}
 
     steps:
       - uses: actions/checkout@v2
       - name: build
         run: |
+          g++ --version
+          cmake --version
           mkdir -p build
           cd build
           cmake -DCMAKE_BUILD_TYPE=${{ matrix.debug }} ..
