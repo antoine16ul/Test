@@ -35,7 +35,7 @@ jobs:
       matrix:
         debug: [ "Debug","Release" ]
         conf:
-          #- { cont: "debian:10", name: "deb10"}
+          - { cont: "debian:10", name: "deb10"}
           #- { cont: "debian/buildd", name: "deb"}
           #- { cont: "debian:9", name: "deb9"}
           #- { cont: "centos:8", name: "cos8"}
