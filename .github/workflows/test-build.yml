@@ -26,7 +26,7 @@ jobs:
           name: ubuntu-${{ matrix.debug }}
           path: build/test
 
-  -build:
+  docker-build:
     name: Docker ${{ matrix.conf.name }} ${{ matrix.debug }}
     runs-on: ubuntu-latest
     container: ${{ matrix.conf.container }}
@@ -49,6 +49,6 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: ubuntu-${{ matrix.debug }}
+          name: Docker-${{ matrix.conf.name }}-${{ matrix.debug }}
           path: build/test
 
