@@ -7,7 +7,7 @@ set(MAINSRC
 
 #========== main executable =================
 add_executable(
-	test
+	prog
 	${MAINSRC}
 )
 
