@@ -35,15 +35,16 @@ jobs:
       matrix:
         debug: [ "Debug","Release" ]
         conf:
-          - { cont: "debian/buildd:10", name: "deb10"}
-          - { cont: "debian/buildd:9", name: "deb9"}
-          - { cont: "centos:8", name: "cos8"}
-          - { cont: "centos:7", name: "cos7"}
+          - { cont: "debian:10", name: "deb10"}
+          - { cont: "debian:9", name: "deb9"}
+          #- { cont: "centos:8", name: "cos8"}
+          #- { cont: "centos:7", name: "cos7"}
 
     steps:
       - uses: actions/checkout@v2
       - name: build
         run: |
+          apt-get -y install cmake
           g++ --version
           cmake --version
           mkdir -p build
