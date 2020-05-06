@@ -5,7 +5,7 @@ on: push
 jobs:
   
   linux-build:
-    name: Linux ubutu ${{ matrix.debug }}
+    name: ubutu ${{ matrix.debug }}
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
@@ -23,6 +23,32 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
+          name: ubuntu-${{ matrix.debug }}
           path: build/test
 
-        
+  -build:
+    name: Docker ${{ matrix.conf.name }} ${{ matrix.debug }}
+    runs-on: ubuntu-latest
+    container: ${{ matrix.conf.container }}
+    strategy:
+      fail-fast: false
+      matrix:
+        debug: [ "Debug","Release" ]
+        conf:
+          - { cont: "debian:10", name: "buster"}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: build
+        run: |
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.debug }} ..
+          make -j2
+          ./test
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-${{ matrix.debug }}
+          path: build/test
+
