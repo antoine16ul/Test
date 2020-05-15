@@ -47,7 +47,6 @@ jobs:
           ${{ matrix.conf.init }}
           g++ --version
           cmake --version
-          python --version
           python3 --version
           mkdir -p build
           cd build
