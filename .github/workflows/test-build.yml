@@ -35,8 +35,8 @@ jobs:
       matrix:
         debug: [ "Debug","Release" ]
         conf:
-          - { cont: "debian:10", name: "deb10", init: "apt-get update && apt-get -y install cmake build-essential"}
-          - { cont: "debian:9", name: "deb9", init: "apt-get update && apt-get -y install cmake build-essential"}
+          - { cont: "debian:10", name: "deb10", init: "apt-get update && apt-get -y install cmake build-essential python3-dev"}
+          - { cont: "debian:9", name: "deb9", init: "apt-get update && apt-get -y install cmake build-essential  python3-dev"}
           - { cont: "centos:8", name: "cos8", init: "yum -y install gcc gcc-c++ make cmake"}
           - { cont: "centos:7", name: "cos7", init: "yum -y install gcc gcc-c++ make cmake3"}
 
@@ -47,6 +47,8 @@ jobs:
           ${{ matrix.conf.init }}
           g++ --version
           cmake --version
+          python --version
+          python3 --version
           mkdir -p build
           cd build
           cmake -DCMAKE_BUILD_TYPE=${{ matrix.debug }} ..
